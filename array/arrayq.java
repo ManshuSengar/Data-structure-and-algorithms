@@ -26,7 +26,7 @@ class arrayq {
         // int max=maximum(arr);
         // int min=minimum(arr);
         // int findIndex=findindex(arr,data);
-        // int r=scn.nextInt();
+         int r=scn.nextInt();
         // rotateArray(arr);
         // display(arr);
         // display(arr);
@@ -38,7 +38,9 @@ class arrayq {
         // int[] b = new int[r];
         // input(b);
         // subtraction(arr, b);
-        subArray(arr);
+       
+        // subArray(arr);
+        System.out.println(binarySearch(arr, r));
 
     }
 
@@ -215,9 +217,45 @@ public static void subArray(int[] a){
   
 }
 
-public static int binarySearch(a,si,ei)
+public static int binarySearch(int[] a,int data)
 {
-    
+    int si=0;int ei=a.length-1;
+   
+    while(si<=ei)
+    {
+    int mid=(si+ei)/2;
+     if(a[mid]==data){
+         return mid;
+     }
+     else if(a[mid]<data){
+         ei=mid-1;
+
+     }
+     else{
+         si=mid+1;
+     }
+    }
+    return -1;
+}
+public static int FirstindexLast(int[] a,int data)
+{
+    int si=0;int ei=a.length-1;
+   
+    while(si<=ei)
+    {
+    int mid=(si+ei)/2;
+     if(a[mid]==data){
+         
+     }
+     else if(a[mid]<data){
+         ei=mid-1;
+
+     }
+     else{
+         si=mid+1;
+     }
+    }
+    return -1;
 }
 
 }

@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": [
+        "Recursion way up",
+        "Recursion in Array",
+        "Recursion with Backtracking"
+    ],
+    "git.ignoreLimitWarning": true
+}
