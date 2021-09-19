@@ -99,10 +99,9 @@ public class linkedlist {
 
     public Node getIdxNode(int idx) {
         Node curr = this.head;
-        int i = 0;
+        
         while (idx-- > 0) {
             curr = curr.next;
-            i++;
         }
         return curr;
     }
@@ -133,25 +132,44 @@ public class linkedlist {
             return -1;
         return removeLastNode().data;
     }
-    
-    public Node removeNodeAt(int idx){
-        Node curr=this.head;
-        Node curr1=null;
-        if(size==1){
-            this.head=this.tail=null;
-        }
-        while(idx>0){
-            curr1.next=curr;
-            curr=curr.next;
-            idx--;
-        }
-        curr1=curr.next;
-        
-        this.size--;
-        return curr;
+
+    public Node removeNodeAt(int idx) {
+        Node node=null;
+        return node;
     }
-    public int removeAt(int idx){
-        if(size==0) return -1;
-        return removeNodeAt().data;
+
+    public int removeAt(int idx) {
+        if (size == 0)
+            return -1;
+        Node node= getIdxNode(idx);
+        Node curr= getIdxNode(idx-1);
+        curr.next=node.next;
+        return node.data;   
+    
+    }
+    
+    public void addNodeAt(Node node,int idx){
+        if(idx==0)
+         addFirstNode(node);
+        else if(idx==size)
+          addLastNode(node);
+        else{
+            Node next= getIdxNode(idx);
+            Node prev= getIdxNode(idx-1);
+            node.next=next;
+            prev.next=node;
+        }  
+           
+
+        
+    }
+    
+    public void addAt(int idx,int data){
+        Node node=new Node(data);
+        if(idx<0 || idx>this.size)
+        {
+            return;
+        }
+        addNodeAt(node,3);
     }
 }
