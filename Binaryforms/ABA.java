@@ -121,3 +121,96 @@ const MyForm = () => {
 
 export default MyForm;
 
+
+import React, { useState } from 'react';
+import { Field, Formik } from 'formik';
+import {
+  InputAdornment,
+  IconButton,
+  FormControl,
+  InputLabel,
+  FormHelperText,
+  TextField,
+  Button,
+} from '@mui/material';
+import { FileCopyOutlined as FileIcon, CloudUploadOutlined as UploadIcon } from '@mui/icons-material';
+
+const CommonFileUploader = ({
+  name,
+  label,
+  formikProps,
+  error,
+  helperText,
+  accept, // Optional prop to specify allowed file types
+  disabled, // Optional prop to disable upload
+  multiple, // Optional prop to allow multiple file selection
+  onUpload, // Optional callback function for custom upload logic
+  ...rest
+}) => {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleInputChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+    formikProps.setFieldValue(name, file); // Update Formik state
+  };
+
+  const handleUpload = async (event) => {
+    if (!onUpload) {
+      // Handle form submission or other actions
+      event.preventDefault();
+      // ...
+    } else {
+      event.preventDefault();
+      try {
+        const response = await onUpload(selectedFile);
+        // Handle successful upload logic based on your backend implementation
+      } catch (error) {
+        // Handle upload errors
+        console.error('Upload error:', error);
+      }
+    }
+  };
+
+  return (
+    <FormControl fullWidth error={error}>
+      <InputLabel htmlFor={name}>{label}</InputLabel>
+      <Field
+        as={TextField}
+        name={name}
+        labelId={name}
+        value={selectedFile ? selectedFile.name : ''} // Display selected file name
+        InputProps={{
+          disabled,
+          readOnly: true, // Prevent direct input
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton component="label" disabled={disabled}>
+                <input
+                  type="file"
+                  hidden
+                  accept={accept}
+                  multiple={multiple}
+                  onChange={handleInputChange}
+                />
+                {selectedFile ? <FileIcon /> : <UploadIcon />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        {...rest}
+      />
+      {error && <FormHelperText>{error}</FormHelperText>}
+      {helperText && <FormHelperText>{helperText}</FormHelperText>
+      {selectedFile && (
+        <Button variant="contained" type="submit" disabled={disabled} onClick={handleUpload}>
+          Upload
+        </Button>
+      )}
+    </FormControl>
+  );
+};
+
+export default CommonFileUploader;
+
+
