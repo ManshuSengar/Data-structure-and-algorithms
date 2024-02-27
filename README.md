@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Field, Formik } from 'formik';
 import {
   InputLabel,
@@ -42,45 +42,3 @@ const CommonDropdown = ({
 };
 
 export default CommonDropdown;
-
-
-
-
-
-
-
-import { useFormik } from 'formik';
-
-const MyForm = () => {
-  const formik = useFormik({
-    initialValues: {
-      myField: '', // Initial value for the dropdown
-    },
-    // ... other formik configuration
-  });
-
-  return (
-    <Formik onSubmit={formik.handleSubmit}>
-      {({ values, touched, errors }) => (
-        <form>
-          {/* Other form fields */}
-          <CommonDropdown
-            name="myField"
-            label="My Dropdown"
-            options={[
-              { value: 'option1', label: 'Option 1' },
-              { value: 'option2', label: 'Option 2' },
-              // ... more options
-            ]}
-            formikProps={formik}
-            error={touched.myField && errors.myField}
-            helperText="Choose an option"
-          />
-          {/* Submit button or other form elements */}
-        </form>
-      )}
-    </Formik>
-  );
-};
-
-export default MyForm;
