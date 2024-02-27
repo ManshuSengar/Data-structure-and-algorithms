@@ -213,4 +213,41 @@ const CommonFileUploader = ({
 
 export default CommonFileUploader;
 
+import { useFormik } from 'formik';
+import { Button } from '@mui/material';
+
+const MyForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      file: null, // Initial value for the file field (optional)
+    },
+    onSubmit: (values) => {
+      const file = values.file;
+      // Handle form submission logic here
+      // You can access the uploaded file using `file`
+      console.log('Uploaded file:', file);
+    },
+  });
+
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      {/* Other form fields */}
+
+      <CommonFileUploader
+        name="file" // Name of the field in your form
+        label="Upload File"
+        formikProps={formik}
+        accept=".pdf,.docx" // Optional: Restrict file types (e.g., PDF and DOCX)
+        // You can add other props like `disabled`, `multiple`, and `onUpload` if needed
+      />
+
+      <Button type="submit" variant="contained">
+        Submit
+      </Button>
+    </form>
+  );
+};
+
+export default MyForm;
+
 
