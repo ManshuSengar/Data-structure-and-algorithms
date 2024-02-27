@@ -80,3 +80,44 @@ const CommonDropdown = ({
 
 export default CommonDropdown;
 
+
+import { useFormik } from 'formik';
+
+const MyForm = () => {
+  const [formikProps, setFormikProps] = useState({
+    initialValues: {
+      myField: '', // Initial value for the dropdown
+    },
+    // ... other formik configuration
+  });
+
+  const handleFormSubmit = (values, actions) => {
+    // Handle form submission logic
+  };
+
+  return (
+    <Formik onSubmit={handleFormSubmit} initialValues={formikProps.initialValues}>
+      {({ values, touched, errors }) => (
+        <form>
+          {/* Other form fields */}
+          <CommonDropdown
+            name="myField"
+            label="My Dropdown"
+            options={[
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' },
+              // ... more options
+            ]}
+            formikProps={{ values, touched, errors }} // Pass formik state
+            error={touched.myField && errors.myField}
+            helperText="Choose an option"
+          />
+          {/* Submit button or other form elements */}
+        </form>
+      )}
+    </Formik>
+  );
+};
+
+export default MyForm;
+
