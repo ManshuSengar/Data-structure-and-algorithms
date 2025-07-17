@@ -120,3 +120,30 @@ var reverseList = function(head) {
     }
     return prev;
 };
+
+
+#141. Linked List Cycle - https://leetcode.com/problems/linked-list-cycle/description/
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+    let cycleNode=new Set();
+    let curr=head;
+    while(curr){
+        if(cycleNode.has(curr)) return true;
+        cycleNode.add(curr);
+        curr=curr.next;
+    }
+    return false;
+};
+
