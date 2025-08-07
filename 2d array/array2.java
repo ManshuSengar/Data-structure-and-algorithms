@@ -2,8 +2,6 @@ import java.util.*;
 
 import javax.lang.model.util.ElementScanner14;
 
-// import jdk.internal.org.jline.utils.Display;
-
 public class array2 {
     public static Scanner scn = new Scanner(System.in);
 
